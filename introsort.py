@@ -1,5 +1,36 @@
 import random
 
+def heapify(A, n, i):
+    largest = i     #Initialize largest as root
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    #See if left child of root exists and is > root
+    if l < n and A[largest] < A[l]:
+        largest = l
+    
+    #See if right child of root exists and is > root
+    if r < n and A[largest] < A[r]:
+        largest = r
+    
+    #Change root, if needed
+    if largest != i:
+        A[i], A[largest] = A[largest], A[i] #Swap
+
+        #Heapify the root
+        heapify(A, n, largest)
+
+def heapSort(A):
+    n = len(A)
+
+    #Build a max heap
+    for i in range(n//2 - 1, -1, -1):
+        heapify(A, n, i)
+    
+    #One by one extract elements
+    for i in range(n-1, 0, -1):
+        A[i], A[0] = A[0], A[i] #Swap
+        heapify(A, i, 0)
 
 def partition(A, p, r, q):
     pivot = A[q]
