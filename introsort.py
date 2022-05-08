@@ -1,13 +1,23 @@
 import math
+import random
 
 def sort(arrayA):
     maxdepth = (math.log(len(arrayA))) * 2
-    introsort(arrayA, maxdepth)
+    p = 0
+    r = len(arrayA) - 1
+    introsort(arrayA, p, r, maxdepth)
 
-def introsort(sampleArray, ):
-    return 
-
-import random
+def introsort(arrayA, p, r, depthLimit):
+    n = r - p + 1
+    if n <=16:
+        insertion_sort(arrayA)
+    elif depthLimit == 0:
+        heapSort(arrayA, p, r)
+    else:   
+        q = random.randrange(p, r + 1)
+        new_q = partition(arrayA,p, r, q)
+        introsort(arrayA, p, new_q - 1, depthLimit - 1)
+        introsort(arrayA, new_q + 1, r, depthLimit - 1)
 
 def heapify(A, n, i):
     largest = i     #Initialize largest as root
@@ -28,19 +38,21 @@ def heapify(A, n, i):
 
         #Heapify the root
         heapify(A, n, largest)
-
-def heapSort(A):
-    n = len(A)
+#A is array, p is start, r is end
+def heapSort(A, p, r):
+    #n is length
+    n = r - p + 1
 
     #Build a max heap
     for i in range(n//2 - 1, -1, -1):
         heapify(A, n, i)
     
     #One by one extract elements
-    for i in range(n-1, 0, -1):
+    for i in range(n - 1, 0, -1):
         A[i], A[0] = A[0], A[i] #Swap
         heapify(A, i, 0)
 
+#p = start, r = end, q = pivot
 def partition(A, p, r, q):
     pivot = A[q]
     tmp = []
@@ -75,3 +87,10 @@ def insertion_sort(lst):
                 lst[j+1] = lst[j]
                 j -= 1
         lst[j+1] = key
+
+if __name__ == '__main__':
+    test = list(range(0, 50))
+    random.shuffle(test)
+    print(test)
+    sort(test)
+    print(test)
