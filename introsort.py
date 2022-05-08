@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import random
 
 def heapify(A, n, i):
@@ -66,3 +67,12 @@ def insertion_sort(lst):
                 lst[j+1] = lst[j]
                 j -= 1
         lst[j+1] = key
+=======
+import math
+
+def sort(arrayA):
+    maxdepth = (math.log(len(arrayA))) * 2
+    introsort(arrayA, maxdepth)
+
+def introsort(sampleArray, )
+>>>>>>> Stashed changes
