@@ -2,12 +2,13 @@ import math
 import random
 
 def sort(arrayA):
-    maxdepth = (math.log(len(arrayA))) * 2
+    maxdepth = math.floor((math.log(len(arrayA), 2))) * 2
     p = 0
     r = len(arrayA) - 1
     introsort(arrayA, p, r, maxdepth)
 
 def introsort(arrayA, p, r, depthLimit):
+    print(depthLimit)
     n = r - p + 1
     if n <=16:
         insertion_sort(arrayA)
@@ -89,8 +90,6 @@ def insertion_sort(lst):
         lst[j+1] = key
 
 if __name__ == '__main__':
-    test = list(range(0, 50))
-    random.shuffle(test)
-    print(test)
+    test = list(range(0, 4000))
+    test.reverse()
     sort(test)
-    print(test)
